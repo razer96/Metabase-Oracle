@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  metabase:
+    image: registry.query.consul:5000/platform/metabase:v0.33.0
+    restart: always
+    ports:
+    - "3000:3000"
+    volumes:
+    - "/home/app/metabase-data/metabase-data"
+    environment:
+      MB_DB_CONNECTION_URI: YOUR_DB_URI
+      HTTP_PROXY: PROXY_SERVER
+      HTTPS_PROXY:PROXY_SERVER
+      JAVA_OPTS: "-Dhttp.proxyHost=proxy-host -Dhttp.proxyPort=8080 -Dhttps.proxyHost=proxy-host -Dhttps.proxyPort=8080 -Xms2048m -Xmx2048m"
+  # nginx: 
+  #   image: nginx:latest
+  #   container_name: nginx
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   volumes:
+  #     - "./default.conf:/etc/nginx/conf.d/default.conf"
